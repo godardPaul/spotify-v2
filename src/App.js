@@ -1,28 +1,42 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBars,faTimes } from '@fortawesome/free-solid-svg-icons'
+import { faBars,faTimes, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import './App.scss';
 import { getCategories } from './services/auth';
 
 function App() {
   const [toggle, setToggle] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [categories, setCategories] = useState([]);
+
   const toggleMenu = () =>{
     setToggle(!toggle);
-  }
+  };
 
-  const auth = useCallback(async () => {
-    await getCategories();
-  }, [])
+  const fetchCategories = useCallback(async () => {
+    const data = await getCategories();
+    setIsLoading(false);
+
+    if (!data || !data.categories) {
+      return;
+    }
+
+    if (data.categories.items.length > 0) {
+      setCategories(data.categories.items);
+    }
+  }, []);
 
   useEffect(() => {
-    auth()
-  }, [auth]);
+    setIsLoading(true);
+    fetchCategories()
+
+  }, [fetchCategories]);
 
   return (
     <div className="grid-container">
       <div className="menu-icon">
-        <FontAwesomeIcon icon={faBars} onClick={()=>toggleMenu()}/>
+        <FontAwesomeIcon icon={faBars} onClick={()=>toggleMenu()} />
       </div>
       <header className="header">
         <div className="header-icon">Icon</div>
@@ -30,7 +44,7 @@ function App() {
       </header>
       <aside className={`sidebar ${toggle ? 'active' : ''}`}>
         <div className="sidebar-close">
-          <FontAwesomeIcon icon={faTimes} onClick={()=>toggleMenu()}/>
+          <FontAwesomeIcon icon={faTimes} onClick={()=>toggleMenu()} />
         </div>
         <ul className="sidebar-list">
           <li className="sidebar-item">Titres lickés</li>
@@ -43,12 +57,20 @@ function App() {
         <div className="search-bar-container">
           <input type="text" id="search-bar" placeholder="Search . . ."></input>
         </div>
-        <div className="overview-container">
-          <div className="overview-card">
-            <div className="overview-icon">Overview</div>
-            <div className="overview-text">Card</div>
-          </div>
+        {isLoading && <FontAwesomeIcon className="spinner" icon={faSpinner} />}
+        {!isLoading && (
+          <div className="overview-container">
+            {categories.length === 0 && (
+              <p>Pas de catégories</p>
+            )}
+            {console.log(categories)}
+            {categories && categories.map((category) => (
+              <div key={category.id} className="overview-card" style={{ backgroundImage: `url(${category.icons[0].url})` }}>
+                <div className="overview-label-category">{category.name}</div>
+              </div>
+            ))}
         </div>
+        )}
       </main>
     </div>
   );
