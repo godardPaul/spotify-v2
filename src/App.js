@@ -1,15 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars,faTimes } from '@fortawesome/free-solid-svg-icons'
 import './App.scss';
+import { getCategories } from './services/auth';
 
 function App() {
   const [toggle, setToggle] = useState(false);
   const toggleMenu = () =>{
     setToggle(!toggle);
   }
-  
+
   const auth = useCallback(async () => {
     await getCategories();
   }, [])
@@ -17,7 +18,7 @@ function App() {
   useEffect(() => {
     auth()
   }, [auth]);
-  
+
   return (
     <div className="grid-container">
       <div className="menu-icon">
