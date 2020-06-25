@@ -5,8 +5,12 @@ import { faBars,faTimes } from '@fortawesome/free-solid-svg-icons'
 import './App.scss';
 import { getCategories } from './services/auth';
 
+const spotifyIcon = require('./assets/images/spotifyicon.png');
+
 function App() {
   const [toggle, setToggle] = useState(false);
+
+
   const toggleMenu = () =>{
     setToggle(!toggle);
   }
@@ -25,7 +29,7 @@ function App() {
         <FontAwesomeIcon icon={faBars} onClick={()=>toggleMenu()}/>
       </div>
       <header className="header">
-        <div className="header-icon">Icon</div>
+        <img src={spotifyIcon} alt="spotify-icon" className="header-icon"/>
         <div className="header-text">Spotify v2</div>
       </header>
       <aside className={`sidebar ${toggle ? 'active' : ''}`}>

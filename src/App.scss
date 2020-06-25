@@ -64,7 +64,8 @@ main {
 }
 
 .sidebar-list li:hover {
-    background-color: white;
+    background-color: $hover-color;
+    border-radius: 5px;
 }
 
 .sidebar.active {
@@ -74,8 +75,8 @@ main {
 .menu-icon {
     display: flex;
     position: fixed;
-    top: 10px;
-    left: 10px;
+    top: 12px;
+    left: 12px;
     font-size: 2rem;
     color: $font-awesome-color;
 }
@@ -85,13 +86,14 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px;
+    padding: 10px;
     background-color: $header-color;
     color: $header-font-color;
 }
 
 .header-icon {
     margin-left: 3em;
+    width: 40px;
 }
 
 .search-bar-container {
