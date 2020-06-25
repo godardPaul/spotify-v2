@@ -39,7 +39,7 @@ main{
   transition: all .6s ease-in-out;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.16), 0 0 0 1px rgba(0, 0, 0, 0.08);
   z-index: 2; /* Needs to sit above the hamburger menu icon */
-  background-color: #394263;
+  background-color: $side-menu-color;
 }
 
 .sidebar-list{
@@ -49,15 +49,21 @@ main{
 .sidebar-close{
   text-align: right;
   padding: 1rem;
+  color: $font-awesome-color;
 }
 
 .sidebar-item{
   padding: 10px;
   margin: 10px;
+  color: $side-bar-item-color;
 }
 
 .sidebar-list li:hover{
   background-color: white;
+}
+
+.sidebar.active{
+  transform: translateX(0);
 }
 
 .menu-icon{
@@ -66,6 +72,7 @@ main{
   top: 10px;
   left: 10px;
   font-size: 2rem;
+  color: $font-awesome-color;
 }
 .header{
   grid-area: header;
