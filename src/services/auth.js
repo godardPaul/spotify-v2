@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const token = 'BQDy7Zc7BRfyaZVOO_Z1t698O-1fODpeIlzu2AfaJBmpMsJWpbCY3Fi2QmwKIuZ5Nft5kAsPHnqYnjmLkoQKU4lkFzE2ot_lPM-deLjxV3CtBNmHnmaomnMKPXNemhmJX5hPxzA';
+const token = 'BQAfLOudpPqvWEFFJzHiuW3B_x9D85AM8c7XLqeT4Es9VeI6BxFSPyX5y_RKtqOeTRNSZStBPLC8_PtGEKUYxrx53NPjt4TUTqk7Bi1kTAFyptOyQs7dpahLkL-pYK-ztHvr8Q0';
 export const getCategories = async() => {
     try {
         const response = await axios.get(

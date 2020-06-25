@@ -54,6 +54,11 @@ main {
 .sidebar-list {
     list-style: none;
     padding: 0;
+    li:hover {
+        background-color: $hover-color;
+        border-radius: 5px;
+        cursor: pointer;
+    }
 }
 
 .sidebar-close {
@@ -66,11 +71,6 @@ main {
     padding: 10px;
     margin: 10px;
     color: $side-bar-item-color;
-}
-
-.sidebar-list li:hover {
-    background-color: $hover-color;
-    border-radius: 5px;
 }
 
 .sidebar.active {
@@ -139,6 +139,10 @@ input:focus {
     border-radius: 15px;
     font-family: Metropolis-light;
     background-size: cover;
+    &:hover {
+        filter: brightness(75%);
+        cursor: pointer;
+    }
 }
 
 .overview-label-category {

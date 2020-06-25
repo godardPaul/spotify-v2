@@ -56,10 +56,6 @@ function App() {
   const indexOfFirstItem = indexOfLastItem - itemsPerPage.current;
   const currentItems = filteredCategories.slice(indexOfFirstItem, indexOfLastItem);
 
-  useEffect(() => {
-
-  }, [filteredCategories]);
-
   const handlePaginate = (number) =>{
     setCurrentPage(number);
   }
@@ -90,10 +86,7 @@ function App() {
           <FontAwesomeIcon icon={faTimes} onClick={()=> toggleMenu()} />
         </div>
         <ul className="sidebar-list">
-          <li className="sidebar-item">Titres lickés</li>
-          <li className="sidebar-item">Récemment écoutés</li>
-          <hr></hr>
-          <li className="sidebar-item">Catégories</li>
+          <li className="sidebar-item">Catégories likées</li>
         </ul>
       </aside>
       <main>
@@ -108,7 +101,7 @@ function App() {
         {isLoading && <FontAwesomeIcon className="spinner" icon={faSpinner} />}
         {!isLoading && (
           <div className="overview-container">
-            {categories.length === 0 && (
+            {currentItems.length === 0 && (
               <p>Pas de catégories</p>
             )}
             {currentItems && currentItems.map((category) => (
