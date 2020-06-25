@@ -8,8 +8,16 @@ function App() {
   const [toggle, setToggle] = useState(false);
   const toggleMenu = () =>{
     setToggle(!toggle);
-
   }
+  
+  const auth = useCallback(async () => {
+    await getCategories();
+  }, [])
+
+  useEffect(() => {
+    auth()
+  }, [auth]);
+  
   return (
     <div className="grid-container">
       <div className="menu-icon">
