@@ -5,6 +5,7 @@ import { faBars,faTimes, faSpinner, faHeart } from '@fortawesome/free-solid-svg-
 import './App.scss';
 import { getCategories } from './services/auth';
 import Pagination from './components/Pagination/index';
+import { setLikesInStorage, isLiked, getLikesFromStorage } from './services/storage';
 
 const spotifyIcon = require('./assets/images/spotifyicon.png');
 
@@ -15,8 +16,8 @@ function App() {
   const [filteredCategories, setFilteredCategories] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState(null);
-  const [likedItems, setLikedItems] = useState([]);
-  const itemsPerPage = useRef(10);
+  const [likedItems, setLikedItems] = useState(getLikesFromStorage() || []);
+  const [itemsPerPage, setItemPerPage] = useState(10);
 
   const toggleMenu = () =>{
     setToggle(!toggle);
@@ -46,14 +47,14 @@ function App() {
   // RECHERCHE
   useEffect(() => {
     setCurrentPage(1);
-    const filteredCategories = categories.filter(category => category.name.indexOf(searchTerm) > -1)
+    const filteredCategories = categories.filter(category => category.name.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1)
     setFilteredCategories(filteredCategories);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
 
   // PAGINATION
-  const indexOfLastItem = currentPage * itemsPerPage.current;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage.current;
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredCategories.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePaginate = (number) =>{
@@ -62,14 +63,24 @@ function App() {
 
   // LIKE
   const handleLikeItem = (category) => {
-    const index = likedItems.indexOf(category);
     const newLikedItems = [...likedItems];
-    if (index !== -1) {
-      newLikedItems.splice(index, 1);
+    const currentCategory = newLikedItems.filter(like => like.id === category.id);
+    if (currentCategory.length > 0) {
+      const index = newLikedItems.indexOf(currentCategory[0]);
+      if (index !== -1) {
+        newLikedItems.splice(index, 1);
+      }
     } else {
       newLikedItems.push(category);
     }
     setLikedItems(newLikedItems);
+    setLikesInStorage(newLikedItems);
+  }
+
+  // SIZE
+  const handleChangeSize = (e) => {
+    const value = e.currentTarget.value;
+    setItemPerPage(parseInt(value));
   }
 
   return (
@@ -97,6 +108,15 @@ function App() {
             placeholder="Search . . ."
             onChange={(e) => setSearchTerm(e.currentTarget.value)}
           />
+          <select className="size-select" name="size" id="size-select" onChange={handleChangeSize}>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+              <option value="40">40</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+          </select>
+
         </div>
         {isLoading && <FontAwesomeIcon className="spinner" icon={faSpinner} />}
         {!isLoading && (
@@ -109,17 +129,18 @@ function App() {
                 key={category.id}
                 className="overview-card"
                 style={{ backgroundImage: `url(${category.icons[0].url})` }}
+                onClick={() => handleLikeItem(category)}
               >
                 <div className="overview-label-category">{category.name}</div>
-                <div className="overview-like-category" onClick={() => handleLikeItem(category)}>
-                  <FontAwesomeIcon className={`like-icon ${likedItems.includes(category) ? 'active' : ''}`} icon={faHeart} />
+                <div className="overview-like-category">
+                  <FontAwesomeIcon className={`like-icon ${isLiked(category) ? 'active' : ''}`} icon={faHeart} />
                 </div>
               </div>
             ))}
         </div>
         )}
         <Pagination
-          itemsPerPage={itemsPerPage.current}
+          itemsPerPage={itemsPerPage}
           totalItems={filteredCategories.length}
           paginate={handlePaginate}
           currentPage={currentPage}

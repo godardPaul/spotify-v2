@@ -1,11 +1,13 @@
-export const getSessionStorageToken = () => {
-    return localStorage.getItem("token");
+export const getLikesFromStorage = () => {
+    return JSON.parse(localStorage.getItem("likes"));
 };
 
-export const setSessionStorageToken = (token) => {
-    sessionStorage.setItem("token", token);
+export const setLikesInStorage = (newLike) => {
+    localStorage.setItem("likes", JSON.stringify(newLike));
 };
 
-export const clearSessionStorage = () => {
-    sessionStorage.clear();
-};
+export const isLiked = (category) => {
+    const currentLikes = localStorage.getItem('likes');
+    let objectLikes = JSON.parse(currentLikes);
+    return (objectLikes || []).filter(like => like.id === category.id).length > 0;
+}

@@ -115,6 +115,13 @@ main {
     border-radius: 5px;
     padding: 1rem;
     font-size: $font-size;
+    border: 1px solid black;
+}
+
+.size-select {
+    border: 1px solid black;
+    margin-left: 10px;
+    border-radius: 5px;
 }
 
 input:focus {
@@ -139,6 +146,7 @@ input:focus {
     border-radius: 15px;
     font-family: Metropolis-light;
     background-size: cover;
+    transition: all .2s ease-in-out;
     &:hover {
         filter: brightness(75%);
         cursor: pointer;
