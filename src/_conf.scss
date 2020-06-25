@@ -1,16 +1,23 @@
 $header-color: #1DB954;
-$header-font-color:white;
+$header-font-color:#fff;
 $card-background: #C4C4C4;
 $side-menu-color:#303531;
 $font-awesome-color:#fff;
 $side-bar-item-color:#fff;
 $hover-color: #555a56;
-$pagination-color:$header-color;
+$font-size: 17px;
+$pagination-color: $header-color;
+$pagination-font-color: #fff;
+$pagination-hover-color: #1ED760;
+$pagination-active-color: #4b4b4b;
+$like-color: #bdbdbd;
+$like-active-color: #ff2845;
 @font-face {
-  font-family: "Metropolis-semi-bold";
-  src: url("./assets/font/METROPOLIS-SEMIBOLD.OTF") format("truetype");
+    font-family: "Metropolis-semi-bold";
+    src: url("./assets/font/METROPOLIS-SEMIBOLD.OTF") format("truetype");
 }
+
 @font-face {
-  font-family: "Metropolis-light";
-  src: url("./assets/font/METROPOLIS-LIGHT.OTF") format("truetype");
+    font-family: "Metropolis-light";
+    src: url("./assets/font/METROPOLIS-LIGHT.OTF") format("truetype");
 }

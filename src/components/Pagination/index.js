@@ -1,7 +1,7 @@
 import React from "react";
 import './index.scss';
 
-const Pagination = ({itemsPerPage,totalItems,paginate}) =>{
+const Pagination = ({ itemsPerPage, totalItems, paginate, currentPage }) =>{
   const pageNumber = [];
   for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++){
     pageNumber.push(i);
@@ -9,7 +9,7 @@ const Pagination = ({itemsPerPage,totalItems,paginate}) =>{
   return(
     <div className="pagination-container">
       {pageNumber.map(number => (
-        <div className="pagination-item" key={number} onClick={()=>paginate(number)}>
+        <div className={`pagination-item ${currentPage === number ? 'active' : ''}`} key={number} onClick={()=>paginate(number)}>
           <p>{number}</p>
         </div>
       ))}

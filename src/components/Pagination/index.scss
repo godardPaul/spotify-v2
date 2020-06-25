@@ -1,18 +1,27 @@
 @import '../../_conf.scss';
-
-.pagination-container{
-  display: flex;
-  justify-content: center;
+.pagination-container {
+    display: flex;
+    justify-content: center;
 }
-.pagination-item{
-  height: 40px;
-  width: 40px;
-  background-color: $pagination-color;
-  text-align: center;
-  margin: 5px;
-  border-radius: 5px;
-  &:hover{
-    cursor: pointer;
-    //TODO color hover
-  }
+
+.pagination-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: $pagination-color;
+    color: $pagination-font-color;
+    margin-bottom: 2rem;
+    &:hover {
+        cursor: pointer;
+        background-color: $pagination-hover-color;
+        //TODO color hover
+    }
+}
+
+.pagination-item.active {
+    color: $pagination-active-color;
 }
