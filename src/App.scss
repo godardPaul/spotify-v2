@@ -9,6 +9,17 @@
     src: url("./assets/font/METROPOLIS-LIGHT.OTF") format("truetype");
 }
 
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -28,6 +39,13 @@ body {
 main {
     grid-area: main;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    .spinner {
+        align-self: center;
+        color: red;
+        animation: spinner 1.5s infinite linear;
+    }
 }
 
 .sidebar {
@@ -117,17 +135,24 @@ main {
 
 .overview-card {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: flex-end;
     background-color: $card-background;
     padding: 20px;
     border-radius: 15px;
     font-family: Metropolis-light;
+    background-size: cover;
+}
+
+.overview-label-category {
+    color: white;
+    font-weight: 600;
 }
 
 @media screen and (min-width:700px) {
     .sidebar {
         grid-area: sidebar;
-        position: relative;
+        position: fixed;
         transform: translateX(0);
     }
     .sidebar-close {
