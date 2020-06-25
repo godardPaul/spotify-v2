@@ -26,6 +26,8 @@ function App() {
         <ul className="sidebar-list">
           <li className="sidebar-item">Titres lickés</li>
           <li className="sidebar-item">Récemment écoutés</li>
+          <hr></hr>
+          <li className="sidebar-item">Catégories</li>
         </ul>
       </aside>
       <main>

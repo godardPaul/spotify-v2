@@ -112,3 +112,23 @@ main{
   border-radius: 15px;
   font-family: Metropolis-light;
 }
+
+@media screen and (min-width:700px){
+  .sidebar{
+    grid-area: sidebar;
+    position: relative;
+    transform: translateX(0);
+  }
+  .sidebar-close{
+    display:none;
+  }
+  .grid-container {
+    grid-template-columns: 240px 1fr;
+    grid-template-areas:
+      "sidebar header"
+      "sidebar main";
+  }
+  .header-icon{
+    margin-left: 0;
+  }
+}
