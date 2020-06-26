@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const token = 'BQB6o6ADRq_DwaQhPEpkomcyI8k2l5aFXRQCDQ5T0UGmsSdLhpQRmNMqmmOjBvQ9uVPBtD2Q0patdtZmftQtgjmrO-vMXYfM1bIRfeDQjgIQV__xZAL_jxvf9vnE5O8t9xBAiKw';
+const token = 'BQBfNibXxMbzDXz8ObEn7IP-bpPqAjp9H79FLcmua_BhRgO3htSe8m7ibp1UkABktYuKwCzXKXW22uwITjf4oJxz9nKWJ_ZXXX1MxCZMHK_Dc1pn8rhfXU_5aNwg49fE06PfHtw';
 export const getCategories = async() => {
     try {
         const response = await axios.get(
@@ -8,6 +8,11 @@ export const getCategories = async() => {
                 headers: {
                     Authorization: `Bearer ${token}`
                 },
+                params: {
+                    limit: 50,
+                    country: 'FR',
+                    locale: 'fr_FR'
+                }
             }
         );
         return response.data;

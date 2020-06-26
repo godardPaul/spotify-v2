@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import './App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars,faTimes, faSpinner, faHeart } from '@fortawesome/free-solid-svg-icons'
 import './App.scss';
-import { getCategories } from './services/auth';
+import { getCategories } from './services/api';
 import Pagination from './components/Pagination/index';
 import { setLikesInStorage, isLiked, getLikesFromStorage } from './services/storage';
 
@@ -83,6 +83,18 @@ function App() {
     setItemPerPage(parseInt(value));
   }
 
+  // Liked items view
+  const handleShowCategories = () => {
+    setFilteredCategories(categories);
+    setCurrentPage(1);
+  }
+
+  const handleShowLikedItem = () => {
+    const likedInStorage = getLikesFromStorage();
+    setFilteredCategories(likedInStorage);
+    setCurrentPage(1);
+  }
+
   return (
     <div className="grid-container">
       <div className="menu-icon">
@@ -97,7 +109,9 @@ function App() {
           <FontAwesomeIcon icon={faTimes} onClick={()=> toggleMenu()} />
         </div>
         <ul className="sidebar-list">
-          <li className="sidebar-item">Catégories likées</li>
+          <li className="sidebar-item" onClick={handleShowCategories}>Toutes les catégories</li>
+          <hr className="separator-center-50" />
+          <li className="sidebar-item" onClick={handleShowLikedItem}>Catégories likées</li>
         </ul>
       </aside>
       <main>
