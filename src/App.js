@@ -7,7 +7,7 @@ import { getCategories } from './services/api';
 import Pagination from './components/Pagination/index';
 import { setLikesInStorage, isLiked, getLikesFromStorage } from './services/storage';
 
-const spotifyIcon = require('./assets/images/spotifyicon.png');
+const spotifyIcon = require('./assets/images/iconfinder_spotify_132840.png');
 
 function App() {
   const [toggle, setToggle] = useState(false);
