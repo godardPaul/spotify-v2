@@ -67,7 +67,7 @@ function App() {
   // PAGINATION
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = filteredCategories.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = (filteredCategories || []).slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePaginate = (number) =>{
     setCurrentPage(number);
@@ -167,7 +167,7 @@ function App() {
         )}
         <Pagination
           itemsPerPage={itemsPerPage}
-          totalItems={filteredCategories.length}
+          totalItems={(filteredCategories || []).length}
           paginate={handlePaginate}
           currentPage={currentPage}
         />
