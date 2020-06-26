@@ -13,28 +13,40 @@ function App() {
   const [toggle, setToggle] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [categories, setCategories] = useState([]);
-  const [filteredCategories, setFilteredCategories] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+
+  // SEARCH BAR
   const [searchTerm, setSearchTerm] = useState(null);
+  const [filteredCategories, setFilteredCategories] = useState([]);
+
+  // LIKES
   const [likedItems, setLikedItems] = useState(getLikesFromStorage() || []);
+
+  // PAGINATION
   const [itemsPerPage, setItemPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const toggleMenu = () =>{
     setToggle(!toggle);
   };
 
   const fetchCategories = useCallback(async () => {
-    const data = await getCategories();
-    setIsLoading(false);
+    try {
+      const data = await getCategories();
 
-    if (!data || !data.categories) {
-      return;
+      if (!data || !data.categories) {
+        return;
+      }
+
+      if (data.categories.items.length > 0) {
+        setCategories(data.categories.items);
+        setFilteredCategories(data.categories.items);
+      }
+    } catch(error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
 
-    if (data.categories.items.length > 0) {
-      setCategories(data.categories.items);
-      setFilteredCategories(data.categories.items);
-    }
   }, []);
 
   useEffect(() => {
